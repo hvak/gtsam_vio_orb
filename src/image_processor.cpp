@@ -198,8 +198,7 @@ bool ImageProcessor::initialize() {
   ROS_INFO("Finish loading ROS parameters...");
 
   // Create feature detector.
-  detector_ptr = FastFeatureDetector::create(
-      processor_config.fast_threshold);
+  detector_ptr = ORB::create();
 
   if (!createRosIO()) return false;
   ROS_INFO("Finish creating ROS IO...");
