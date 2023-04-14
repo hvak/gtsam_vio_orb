@@ -1,7 +1,7 @@
 <launch>
 
   <!-- ImageProcessorNodelet/iSAM2 Variables -->
-  <arg name="robot" default="turtlebot"/>
+  <arg name="robot" default="auv"/>
   <arg name="calibration_file"
     default="$(find gtsam_vio)/config/zed_imu_camera_altered.yaml"/>
 
@@ -20,6 +20,11 @@
   <param name="camera_frame_id" value="zed_left_camera_optical_frame"/>
   <param name="robot_frame_id" value="$(arg robot)"/>
   <param name="world_frame_id" value="$(arg world_frame_id)"/>
+  
+  <node name="republish_left" type="republish" pkg="image_transport" output="screen" args="compressed in:=/zedm/zed_node/left_raw/image_raw_color out:=/zed/zed_node/left/image_rect_color" />
+
+  <node name="republish_right" type="republish" pkg="image_transport" output="screen" args="compressed in:=/zedm/zed_node/right_raw/image_raw_color out:=/zed/zed_node/right/image_rect_color" />
+
   
   <group ns="$(arg robot)">
     
